@@ -1,0 +1,15 @@
+{
+	"Hello": "Hello Ukraine",
+	"You have %s message": {
+        "one": "Ви маєте %s повідомлення",
+        "other": "Ви маєте %s повідомлень"
+	},
+	"SVCCS001": "[SVCCS001] Obtuvo con éxito las Compañias",
+	"SVCCE002": "[SVCCE001] Error de Base de Datos" ,
+	"SVCCE003": "[SVCCE001] Error de Validación" ,
+	"NOTFOUND": "[NOTFOUND] No se encontro ningun resultado en la busqueda",
+	"SVCC001" :"[SVCC001] Autenticación fallida, password o usuario incorrecto",
+	"SVCC002" :"[SVCC002] Autenticación fallida, password incorrecto " ,
+	"SVCS003":"[SVCC003] Ya existe una session para este usuario" 
+
+}

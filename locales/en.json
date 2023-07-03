@@ -1,0 +1,13 @@
+{
+	"Hello": "Hello",
+	"You have %s message": {
+		"one": "You have %s message",
+		"other": "You have %s message"
+	},
+	"one": "one",
+	"Helloxxxx": "Helloxxxx",
+	"Helloprueba": "Helloprueba",
+	"one and two": "one and two",
+	"SVCCS001": "[SVCC001] Success Get Companies ",
+	"SVCC001": "Authentication failed. Wrong Password or email"
+}

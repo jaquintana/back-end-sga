@@ -1,0 +1,17 @@
+{
+	"Hello": "Привіт",
+    "maolo":"xxxxx",
+	"English":"USA",
+	"You have %s message": {
+		"one": "You have %s message",
+		"other": "You have %s message"
+	},
+	"SVCCS001": "[SVCC001] Success Get Companies",
+	"SVCCE002": "[SVCCE001] Error Data Base " ,
+	"SVCCE003": "[SVCCE001] Error Data Validation " ,
+	"NOTFOUND": "[NOTFOUND] No search results found",
+	"SVCS001": "[NOT FOUND] User don't exist",
+	"SVCC001": "Authentication failed. Wrong Password or email",
+	"SVCC002":"[SVCC002] Authentication failed, invalid password " ,
+	"SVCS003":"[SVCC002] Already exist active session" 
+}
