@@ -1,1 +1,3 @@
-export * from './cambio_contrasena'
+
+export * from  './buzon_traslado'
+

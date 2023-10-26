@@ -88,5 +88,5 @@ export class mg_cat_tipo_accion_servidor  extends Model{
             paranoid       : true
        })
     
-       mg_cat_tipo_accion_servidor.sync({force:true , alter: true})
+       mg_cat_tipo_accion_servidor.sync({force:false , alter: false})
 module.exports = mg_cat_tipo_accion_servidor

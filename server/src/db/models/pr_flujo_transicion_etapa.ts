@@ -84,5 +84,5 @@ export class pr_flujo_transicion_etapa extends mg_base{
             paranoid: true
        })
 
-       pr_flujo_transicion_etapa.sync({force:true, alter:true})
+       pr_flujo_transicion_etapa.sync({force:false, alter:false})
 module.exports = pr_flujo_transicion_etapa

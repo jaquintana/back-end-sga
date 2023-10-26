@@ -49,7 +49,46 @@ export class pr_flujo_etapa extends mg_base{
         allowNull: false,
         defaultValue:'N'
      },
- 
+     responsable:{
+      allowNull : true,
+      type      : DataTypes.INTEGER,
+      references: { model: 'mg_usuario', key: 'id' },
+      onDelete  : 'CASCADE',
+      onUpdate  : 'CASCADE',
+     },
+
+     fecha_vencimiento:{
+      allowNull: false,
+      type     : DataTypes.DATE,
+      defaultValue: new Date()
+     },
+     fecha_inicio:{
+      allowNull: false,
+      type     : DataTypes.DATE,
+      
+     },
+
+     fecha_fin:{
+      allowNull: true,
+      type     : DataTypes.DATE,
+     },
+     
+
+     estado:{
+      allowNull: false,
+      type      : DataTypes.INTEGER,
+      defaultValue: 1 //uno es estado inicial o NO INICIADO
+     },
+
+     prioridad:{
+      allowNull: false,
+      type      : DataTypes.INTEGER,
+      defaultValue: 1 //uno es estado inicial o NO INICIADO
+     },
+     notas:{
+      allowNull: true,
+      type      : DataTypes.TEXT,
+     },
      eliminado:{
         allowNull: false,
         type     : DataTypes.ENUM('S','N'),

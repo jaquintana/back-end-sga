@@ -29,6 +29,15 @@ export class mg_grupo_x_vista extends Model{
     grupo_id: {
           type: DataTypes.INTEGER
       },
+      regla:{
+        type: DataTypes.STRING,
+        allowNull: true
+
+      },
+      accion_forma:{
+        type: DataTypes.STRING,
+        allowNull: true
+      },
      
         activo: {
             type     : DataTypes.ENUM('S','N'),

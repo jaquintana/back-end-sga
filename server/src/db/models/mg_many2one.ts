@@ -51,6 +51,11 @@ export class mg_many2one extends mg_base{
         allowNull:false,
         
     },
+    todas_LLaveforanea  :{
+        type: DataTypes.STRING,
+        allowNull:false,
+        
+    },
     contexto:{
         type: DataTypes.STRING,
         allowNull:true

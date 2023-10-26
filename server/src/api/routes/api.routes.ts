@@ -9,14 +9,19 @@ import {CompanyController,
     formsDatabaseController,
     ActionServerController
   } from '../controllers'
+  import { Request, Response, NextFunction } from 'express';
+  const jwt = require('jsonwebtoken');
+  import { checkJwt } from '../../rules/errorHandler';
 
   const CtrlMain=require('../controllers/temp/temp')
+
+  
 
   'use strict';
   
   var multer  = require('multer')
   var upload = multer()
- 
+  var pass:boolean=true
 
 
 
@@ -37,8 +42,7 @@ export function initRoutes(app, router) {
   const formDatabase= new formsDatabaseController()
   
 
-
-   
+    
     apiRoute.get('/', (req:any, res:any) => res.status(200).send({message: 'Api Server is running!'}))
     apiRoute.post('/api/signin', session.signin.bind(session))
     apiRoute.post('/api/signout', session.signout.bind(session))
@@ -54,9 +58,20 @@ export function initRoutes(app, router) {
       return res.json(resp)
     })*/
 
-    apiRoute.post('/api/actionform', actionform.actionForm.bind(actionform),function (res, resp) {
+   apiRoute.post('/api/actionform',[checkJwt], actionform.actionForm.bind(actionform),function (res, resp){
+
+  })
+  
+
+
+    /*apiRoute.post('/api/actionform',session.valsesion.bind(session)).then(actionform.actionForm.bind(actionform),function (res, resp) {
       return res.json(resp)
+    })*/
+
+     apiRoute.post('/api/actionpaginationform',actionform.actionPaginationForm .bind(actionform),function (res, resp) {
+      //return res.json(resp)
     })
+
     apiRoute.post('/api/actionmenu', actionMenu.actionMenu.bind(actionMenu),function (res, resp) {
       return res.json(resp)
     })
@@ -69,6 +84,24 @@ export function initRoutes(app, router) {
     apiRoute.post('/api/accionserver', actionServer.actionServer.bind(actionServer),function (res, resp) {
       //return res.json(resp)
     })
+
+   
+    router.post('/api/accionserverimage', upload.array('images[]',2), function (req, res, next) {
+       console.log("router post image",req.body)
+       CtrlMain.salvarDocumentImage(req, res, (err, resp) => {
+        if (err) next(err)
+           return res.json(resp)
+    })
+     })
+
+    router.post('/api/accionactdocimage', upload.array('images[]',2), function (req, res, next) {
+      console.log("actualiza documento con imagen",req.body)
+      CtrlMain.actualizaDocumentImage(req, res, (err, resp) => {
+       if (err) next(err)
+          return res.json(resp)
+   })
+    })
+    
 
     apiRoute.post('/api/datalist', actionform.dataList.bind(actionServer),function (res, resp) {
       return res.json(resp)
@@ -83,7 +116,7 @@ export function initRoutes(app, router) {
     })
 
    router.post('/api/putuserimage', upload.array('images[]',2), function (req, res, next) {
-    console.log("xxx")
+    
       CtrlMain.saveMediaUserImages(2,req, res, (err, resp) => {
          if (err) next(err)
             return res.json(resp)
@@ -91,10 +124,12 @@ export function initRoutes(app, router) {
    })
 
    router.post('/api/updtformserver',formDatabase.updtModel.bind(formDatabase),function (req, res, resp) {
-    console.log("xxx")
     return res.json(resp)
    })
 
+   router.post('/api/createformserver',formDatabase.inserDataModel.bind(formDatabase),function (req, res, resp) {
+    return res.json(resp)
+   })
      apiRoute.post('/api/createchildformserver',formDatabase.createChildModel.bind(formDatabase),function(req,res,resp){
       return res.json(resp)
      })

@@ -46,6 +46,7 @@ export class Server {
       
           try {
             this.app.listen(port, async () => {
+                console.log("dirname",__dirname)
                 console.log(port,"---Proyecto Comision.Server started on por http://api.apijunla.com:3001");
   
             });

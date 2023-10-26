@@ -71,5 +71,5 @@ alerta_adjuntos.init(
     
 )
 
-alerta_adjuntos.sync({force:true, alter:true})
+alerta_adjuntos.sync({force:true, alter:false})
 module.exports = alerta_adjuntos

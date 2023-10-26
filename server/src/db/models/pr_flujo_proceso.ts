@@ -32,6 +32,23 @@ export class pr_flujo_proceso extends mg_base{
         allowNull: false,
         defaultValue:'N'
      },
+
+     responsable:{
+      allowNull : true,
+      type      : DataTypes.INTEGER,
+      references: { model: 'mg_usuario', key: 'id' },
+      onDelete  : 'CASCADE',
+      onUpdate  : 'CASCADE',
+     },
+
+     fecha_vencimiento:{
+      allowNull: false,
+      type     : DataTypes.DATE,
+      defaultValue: new Date()
+     },
+
+     
+
  
      eliminado:{
         allowNull: false,

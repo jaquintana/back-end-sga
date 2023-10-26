@@ -14,6 +14,7 @@ export interface mg_acceso_x_modelo_interface{
      grupo_id   ?: number;
      modelo_id?: number;
      descripcion?:string;
+     regla:string|null
 
 }
 
@@ -47,7 +48,8 @@ export class mg_acceso_x_modelo extends Model{
           allowNull: false
         },
      descripcion: {
-          type: DataTypes.STRING
+          type: DataTypes.STRING,
+         
         },
      abstract:
      {
@@ -57,6 +59,12 @@ export class mg_acceso_x_modelo extends Model{
      {
         type: DataTypes.STRING
       },
+    
+     regla:
+     {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
       lectura:
        {
         type     : DataTypes.ENUM('S','N'),

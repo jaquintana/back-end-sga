@@ -109,6 +109,9 @@ export interface responseActionForm{
   dataToSearch   : any,
   extraData      : [{}],
   parameter      : any
+  paginacion     : {} 
+  sort           : {}
+  filtros        : any[] 
 }
 
 
@@ -183,10 +186,21 @@ id: {
     allowNull: true,
   },
 
+  dominio_detalle:{
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+
   pagina:{
     type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue:80
+  },
+
+  opciones_pagina:{
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue:'[10,50,80]'
   },
 
     vista_forma:{
@@ -194,6 +208,18 @@ id: {
         allowNull: false,
         defaultValue:'New'
     } ,
+    sjoin:{
+      type: DataTypes.STRING,
+      allowNull: true,
+  } ,
+  dominio_sjoin:{
+    type: DataTypes.STRING(1000),
+    allowNull: true,
+} ,
+  proyection_sjoin:{
+      type: DataTypes.STRING,
+       allowNull: true,
+   } ,
     modo:{
       type: DataTypes.ENUM('create','update','empty','query'),
       allowNull: false,
@@ -210,5 +236,5 @@ id: {
         paranoid: true
    })
 
-   mg_accion_forma.sync({force:false,alter:true})
+   mg_accion_forma.sync({force:false,alter:false})
 module.exports = mg_accion_forma

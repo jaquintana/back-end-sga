@@ -11,12 +11,12 @@ import { arrayBuffer } from 'stream/consumers'
 
 
 export interface mg_usuario_type{
-  id                :number,
+  id                 :number,
   correo             : string,
-  nombre         : string,
-  primer_apellido          : string,
-  segndo_apellido          : string,
-  movil             : string,
+  nombre             : string,
+  primer_apellido    : string,
+  segndo_apellido    : string,
+  movil              : string,
   telefono:string;
   contrasena         : string,
   resetToken        : Date,
@@ -25,6 +25,8 @@ export interface mg_usuario_type{
   activo            : boolean,
   institucion_id    : number,
   empleado          : boolean,
+  puesto_organizacional_id:number,
+  unidad_organizacional_id:number
 }
 
 
@@ -40,9 +42,9 @@ export class mg_usuario extends mg_base{
        declare resetToken        : Date
        declare resetTokenExpireAt: Date
        declare resetTokenSentAt  : Date
-       declare activo            : boolean
+       declare activo            : string
        declare institucion_id        : number
-       declare empleado          : boolean
+    //   declare empleado          : boolean
        
        
 
@@ -94,6 +96,14 @@ export class mg_usuario extends mg_base{
       movil:{
           type: DataTypes.STRING
         },
+        contrasena: {
+          allowNull: false,
+          type: DataTypes.STRING,
+          validate: {
+            notEmpty: true,
+          }
+        },
+
         status:{
           type: DataTypes.ENUM('ONLINE','OFFLINE','BLOCK','WAIT','OTHER'),
           defaultValue:"OFFLINE",
@@ -113,20 +123,19 @@ export class mg_usuario extends mg_base{
             return this.setDataValue("telefono",JSON.stringify(value));
           }
       },
-      contrasena: {
-          allowNull: false,
-          type: DataTypes.STRING,
-          validate: {
-            notEmpty: true,
-          }
-        },
+      
         aut_en_dos_pasos:
         {
           allowNull: false,
           type: DataTypes.BOOLEAN,
           defaultValue:false
         },
-
+        acceso_jerarquico:
+        {
+          allowNull: false,
+          type: DataTypes.BOOLEAN,
+          defaultValue:false
+        },
         periodo_cambio_contrasena:
         {
           allowNull: false,
@@ -167,16 +176,34 @@ export class mg_usuario extends mg_base{
         }
       },
 
+     tipo_identificacion:{
+     allowNull: true,
+     type: DataTypes.INTEGER,
+     } ,
 
-     
-      
-      
-      empleado:{
-        allowNull: false,
-        type: DataTypes.BOOLEAN,
-        defaultValue: false   
+     identificacion:{
+       allowNull: true,
+       type: DataTypes.INTEGER,
+     },
+      unidad_organizacional_id:{
+        allowNull: true,
+        type: DataTypes.INTEGER,
+
+      }, 
+      puesto_organizacional_id:{
+        allowNull: true,
+        type: DataTypes.INTEGER,
       },
-      
+      empleado:{
+        type     : DataTypes.ENUM('S','N'),
+        allowNull: false,
+        defaultValue:'N'
+      },
+      eliminado:{
+        type     : DataTypes.ENUM('S','N'),
+        allowNull: false,
+        defaultValue:'N'
+      },
       institucion_id:{
         allowNull: false,
         type: DataTypes.INTEGER,
@@ -192,13 +219,10 @@ export class mg_usuario extends mg_base{
       activo: {
         type     : DataTypes.ENUM('S','N'),
         allowNull: false,
-        defaultValue:'N'
+        defaultValue:'S'
      },
  
-     eliminado:{
-        allowNull: false,
-        type     : DataTypes.ENUM('S','N'),
-       },
+  
        fecha_actualizado:{
         allowNull: false,
         type     : DataTypes.DATE,
@@ -241,6 +265,8 @@ export class mg_usuario extends mg_base{
        {   sequelize,
             indexes: [{unique: true, fields: ['correo']}],  
             freezeTableName: true,
+            timestamps: false,
+            paranoid: true,
             modelName: 'mg_usuario',
             tableName: 'mg_usuario',
             defaultScope: {
@@ -256,13 +282,13 @@ export class mg_usuario extends mg_base{
                 }
               }
             },
-            timestamps: true,
-            paranoid: true,
+            
+           
             hooks: {
               beforeCreate:((user)=>{
                 user.nombre = user.nombre.toLowerCase();
                 user.primer_apellido  = user.primer_apellido.toLowerCase();
-                user.activo=false;
+                user.activo='S';
               }),
               beforeSave:((user, options) => {
                 if (user.changed('contrasena')) {
@@ -286,5 +312,5 @@ export class mg_usuario extends mg_base{
       
        )
    
-    mg_usuario.sync({force:false ,alter:false})
+    mg_usuario.sync({force:false,alter:false})
     module.exports = mg_usuario

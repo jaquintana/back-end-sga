@@ -96,25 +96,25 @@ async confirmation(req,res){
             )
             res.redirect('http://localhost:4500/sign-in')
           }catch(error){
-              await super._createDataAnyModel('bnc_mail_error',{description:error,token:req.params.token}) 
+              await super._createDataAnyModel(res,'bnc_mail_error',{description:error,token:req.params.token}) 
           }            
          }catch(error){
-               await super._createDataAnyModel('bnc_mail_error',{description:error,token:req.params.token}) 
+               await super._createDataAnyModel(res,'bnc_mail_error',{description:error,token:req.params.token}) 
          }
         }
         else{
-           await super._createDataAnyModel('bnc_mail_error',{description:'not return result of bnc_mail model, already activate or not exist, Controller: confirmation line 56',token:req.params.token}) 
+           await super._createDataAnyModel(res,'bnc_mail_error',{description:'not return result of bnc_mail model, already activate or not exist, Controller: confirmation line 56',token:req.params.token}) 
            res.status(400).send({success: false})
         }
        }catch(error){
-            super._createDataAnyModel('bnc_mail_error',{description:error,token:req.params.token}) 
+            super._createDataAnyModel(res,'bnc_mail_error',{description:error,token:req.params.token}) 
         }
       } else
       {
-         super._createDataAnyModel('bnc_mail_error',{description:'not return result, return confirmToken.returnToken',token:req.params.token})
+         super._createDataAnyModel(res,'bnc_mail_error',{description:'not return result, return confirmToken.returnToken',token:req.params.token})
       }
     }).catch(error=> {
-         super._createDataAnyModel('bnc_mail_error',{description:error,token:req.params.token})
+         super._createDataAnyModel(res,'bnc_mail_error',{description:error,token:req.params.token})
     })
   }
 

@@ -4,4 +4,9 @@ export interface action_server
     modelo_id:number;
     ref_id:object;
     set_id:object;
+    accionForm:number
+    id:number;
+    data:any;
+    filtros:any[]
+    dataToSearch:object
 }
